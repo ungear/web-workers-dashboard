@@ -4,7 +4,7 @@
   </head>
   <body>
     <section id="dedicated">
-      <h6>Dedicated worker</h6>
+      <h6>Simple Dedicated worker</h6>
       <input id="first" type="text"/>
       +
       <input id="second" type="text"/>
@@ -13,12 +13,23 @@
       <p class='errors'></p>
     </section>
     <section id="shared">
-        <h6>Shared worker</h6>
-        <p>Set title for all pages form this domain (at least in Chrome)</p>
-        <input id="titleSetter" type="text" placeholder="Set new title"/>
-        <button id="setTitleButton"type="button">Set title</button>
+        <h6>Dedicated worker with intensive calculation</h6>
+        <p>The task is to sort huge random array many times. Sorting in the main thread freezes UI, wherease sorting in worker keeps UI alive during calculations </p>
+        <button id="intensiveStartPlain">Start without worker</button>
+        <button id="intensiveStartWorker">Start using worker</button>
+        <p id="report"></p>
+        <p>
+          <input type="text"/>
+        </p>
         <p class='errors'></p>
-      </section>
+    </section>
+    <section id="shared">
+      <h6>Shared worker</h6>
+      <p>Set title for all pages form this domain (at least in Chrome)</p>
+      <input id="titleSetter" type="text" placeholder="Set new title"/>
+      <button id="setTitleButton" type="button">Set title</button>
+      <p class='errors'></p>
+    </section>
     <script src='main.js'></script>
   </body>
 </html>
