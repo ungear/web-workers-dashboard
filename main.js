@@ -1,12 +1,30 @@
 (function(){
   if(window.Worker){
-    initialize()
+    initializeDedicatedWorker()
   }
   else{
-    console.error("Unfortunately, workers are not supported")
+    dedicated.querySelector('.errors').innerHTML = "Unfortunately, workers are not supported in this browser"
+  }
+  if(window.SharedWorker){
+    initializeSharedWorker()
+  }
+  else{
+    shared.querySelector('.errors').innerHTML = "Unfortunately, shared workers are not supported in this browser"
   }
 
-  function initialize(){
+  function initializeSharedWorker(){
+    var mySharedWorker = new SharedWorker("shared-worker.js");
+    setTitleButton.onclick = function(){
+      mySharedWorker.port.postMessage(titleSetter.value);
+    }
+    mySharedWorker.port.start(); 
+
+    mySharedWorker.port.onmessage = function(e) {
+      document.title = e.data
+    }
+  }
+
+  function initializeDedicatedWorker(){
     var myWorker = new Worker("worker-1.js");
     first.onchange = calculate;
     second.onchange = calculate;
